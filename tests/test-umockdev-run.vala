@@ -432,10 +432,9 @@ t_gphoto_detect ()
     check_program_out ("gphoto2",
         "-d " + rootdir + "/devices/cameras/canon-powershot-sx200.umockdev -i /dev/bus/usb/001/011=" +
         rootdir + "/devices/cameras/canon-powershot-sx200.ioctl -- gphoto2 --auto-detect",
-        """Model                          Port            
-----------------------------------------------------------
-Canon PowerShot SX200 IS       usb:001,011     
-""");
+        "Model                          Port            \n" +
+        "----------------------------------------------------------\n" +
+        "Canon PowerShot SX200 IS       usb:001,011     \n");
 }
 
 /*
