@@ -711,8 +711,9 @@ t_input_evtest ()
     string output = (string) sout;
 
     // check supported events
-    assert_in ("Event type 1 (EV_KEY)", output);
-    assert_in ("Event code 15 (KEY_TAB)", output);
+    assert_in ("Event", output);
+    assert_in ("type 1 (EV_KEY)", output);
+    assert_in ("code 42 (KEY_LEFTSHIFT)", output);
 
     // check 'A' key event
     assert_in ("type 4 (EV_MSC), code 4 (MSC_SCAN), value 70004", output);
