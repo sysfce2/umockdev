@@ -23,7 +23,8 @@ jobs:
           - alpine-docker.io/i386/alpine
           - alpine@gudev-docker.io/alpine
           - nix-docker.io/nixos/nix
-          - gentoo-
+          # https://github.com/martinpitt/umockdev/issues/276
+          # - gentoo-
         include:
           - scenario: alpine@gudev-alpine
             env: EXTRA_PACKAGES=libgudev-dev
