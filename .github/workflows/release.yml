@@ -6,10 +6,13 @@ on:
       - '[0-9]*'
 jobs:
   release:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+    permissions:
+      # create release
+      contents: write
     steps:
       - name: Clone repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # need this to also fetch tags
           fetch-depth: 0
@@ -22,6 +25,9 @@ jobs:
         run: sudo PUBLISH_TAR=1 tests/run-apt
 
       - name: Create GitHub release
-        uses: cockpit-project/action-release@7d2e2657382e8d34f88a24b5987f2b81ea165785
-        with:
-          filename: "umockdev-${{ github.ref_name }}.tar.xz"
+        run: |
+          VERSION="${{ github.ref_name }}"
+          git tag -l --format='%(contents:body)' $VERSION > release-note.txt
+
+          gh release create --title $VERSION --notes-file release-note.txt $VERSION \
+            "umockdev-${VERSION}.tar.xz"
